@@ -18,12 +18,6 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>D:\SteamLibrary\steamapps\common\Critter Cove\Critter Cove_Data\Managed\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Addressables">
-      <HintPath>D:\SteamLibrary\steamapps\common\Critter Cove\Critter Cove_Data\Managed\Unity.Addressables.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.ResourceManager">
-      <HintPath>D:\SteamLibrary\steamapps\common\Critter Cove\Critter Cove_Data\Managed\Unity.ResourceManager.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>D:\SteamLibrary\steamapps\common\Critter Cove\Critter Cove_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
