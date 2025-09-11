@@ -10,7 +10,7 @@ namespace CritterCove.SkinLoader
     {
         static void Postfix(GameDataCollections __result)
         {
-            SkinLoader.AddCustomizationsToGameData(__result);
+            SkinLoaderV2.Instance.Initialize(__result);
         }
     }
 }
