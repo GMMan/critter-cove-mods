@@ -24,7 +24,7 @@
       <HintPath>UserLibs\Autodesk.Fbx.dll</HintPath>
     </Reference>
     <Reference Include="MelonLoader">
-      <HintPath>D:\SteamLibrary\steamapps\common\Divide\MelonLoader\MelonLoader.dll</HintPath>
+      <HintPath>D:\SteamLibrary\steamapps\common\Critter Cove\MelonLoader\MelonLoader.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>D:\SteamLibrary\steamapps\common\Critter Cove\Critter Cove_Data\Managed\Newtonsoft.Json.dll</HintPath>
