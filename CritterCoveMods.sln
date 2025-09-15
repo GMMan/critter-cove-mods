@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CritterCove.SkinExporter", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CritterCove.NoUnhandledExceptionPopup", "CritterCove.NoUnhandledExceptionPopup\CritterCove.NoUnhandledExceptionPopup.csproj", "{48BD243C-0AF9-4AD8-A76E-86C78BAA0FA0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CritterCove.ColorPreSetManagerSaveLoad", "CritterCove.ColorPreSetManagerSaveLoad\CritterCove.ColorPreSetManagerSaveLoad.csproj", "{22D71C25-5097-42BB-A889-7A55DB960170}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{48BD243C-0AF9-4AD8-A76E-86C78BAA0FA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{48BD243C-0AF9-4AD8-A76E-86C78BAA0FA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{48BD243C-0AF9-4AD8-A76E-86C78BAA0FA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22D71C25-5097-42BB-A889-7A55DB960170}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22D71C25-5097-42BB-A889-7A55DB960170}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22D71C25-5097-42BB-A889-7A55DB960170}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22D71C25-5097-42BB-A889-7A55DB960170}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
