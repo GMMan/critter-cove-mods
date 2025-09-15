@@ -234,8 +234,14 @@ namespace CritterCove.SkinExporter
         {
             Texture2D newTexture = ModelExporter.DeCompressTexture(texture, false);
             var texturePng = newTexture.EncodeToPNG();
-            File.WriteAllBytes(path, texturePng);
-            UnityEngine.Object.Destroy(newTexture);
+            try
+            {
+                File.WriteAllBytes(path, texturePng);
+            }
+            finally
+            {
+                UnityEngine.Object.Destroy(newTexture);
+            }
         }
     }
 }
