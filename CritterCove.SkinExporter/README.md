@@ -78,6 +78,10 @@ point, you may way to stick to drawing patterns with the mask colors instead.
 Other notes
 -----------
 
+Human models may be missing their groin area because they always wear pants,
+so due to the way the character structure works and culling of inactive
+wearables, there may be nothing there in the exported model.
+
 The version of the FBX Exporter package has been modified to remove dependencies
 from the Unity Editor, and additionally modified to export shader textures
 introduced by Critter Cove's shaders specifically. The source code for this
