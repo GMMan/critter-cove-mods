@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace CritterCove.SkinLoader
 {
-    internal class SkinLoaderV2
+    public class SkinLoaderV2
     {
         public const string SKINS_DIR_NAME = "skins";
         public const string DEFINITION_FILE_NAME = "skinDefinition.json";
@@ -94,6 +94,9 @@ namespace CritterCove.SkinLoader
         {
             foreach (var material in cachedMaterials.Values)
             {
+                // Note: the materials come from Addressables, but the game keeps track of the handles internally
+                // and releases them on new game load, so we do not need to call Addressables.ReleaseInstance().
+                // No idea where in Addressables Object.Destroy() is called on the instance though.
                 UnityEngine.Object.Destroy(material);
             }
             foreach (var texture in createdTextures)
