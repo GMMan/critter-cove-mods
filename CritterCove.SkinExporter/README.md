@@ -50,8 +50,8 @@ Exported contents
 Once you have finished creating your skin, you can delete `export.fbx` and the
 `fbx_textures` folder.
 
-Full color textures vs maps
----------------------------
+Full color textures vs masks
+----------------------------
 
 The game uses RGB masks to allow color customization. Essentially, each
 character material can have up to two mask textures, which represent sets of
