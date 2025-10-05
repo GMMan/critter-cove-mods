@@ -18,6 +18,21 @@ namespace CritterCove.SkinExporter
 
         static readonly MethodInfo PEUtils_ImageFirstSection = AccessTools.Method(typeof(PEUtils), "ImageFirstSection");
 
+        class PatchInfo
+        {
+            public int TextOffset { get; set; }
+            public byte[] OrigBytes { get; set; }
+            public byte[] PatchBytes { get; set; }
+        }
+
+        static readonly PatchInfo[] PATCHES = new[]
+        {
+            // Unity 2022.3.62f2
+            new PatchInfo { TextOffset = 0x10834D0, OrigBytes = new byte[] { 0x0f, 0xb6, 0x01 }, PatchBytes = new byte[] { 0xb0, 0x01, 0x90 } },
+            // Unity 2022.3.61f1
+            new PatchInfo { TextOffset = 0x1084f10, OrigBytes = new byte[] { 0x0f, 0xb6, 0x01 }, PatchBytes = new byte[] { 0xb0, 0x01, 0x90 } },
+        };
+
         bool engineModified;
 
         public override void OnInitializeMelon()
@@ -48,14 +63,20 @@ namespace CritterCove.SkinExporter
             ImageSectionHeader* textSection = (ImageSectionHeader*)Pointer.Unbox(boxedTextSection);
 
             IntPtr textSectionPtr = IntPtr.Add(hModuleUnityPlayer, textSection->virtualAddress);
-            IntPtr patchPtr = IntPtr.Add(textSectionPtr, 0x1084f10);
-            Span<byte> patchSpan = new Span<byte>(patchPtr.ToPointer(), 3);
-            if (!patchSpan.SequenceEqual(new byte[] { 0x0f, 0xb6, 0x01 })) return false;
 
-            if (!VirtualProtect(textSectionPtr, (UIntPtr)textSection->virtualSize, 0x40, out var oldProtect)) return false; // change protection to RWX
-            new byte[] { 0xb0, 0x01, 0x90 }.CopyTo(patchSpan);
-            VirtualProtect(textSectionPtr, (UIntPtr)textSection->virtualSize, oldProtect, out _);
-            return true;
+            foreach (var patchInfo in PATCHES)
+            {
+                IntPtr patchPtr = IntPtr.Add(textSectionPtr, patchInfo.TextOffset);
+                Span<byte> patchSpan = new Span<byte>(patchPtr.ToPointer(), patchInfo.OrigBytes.Length);
+                if (!patchSpan.SequenceEqual(patchInfo.OrigBytes)) continue;
+
+                if (!VirtualProtect(textSectionPtr, (UIntPtr)textSection->virtualSize, 0x40, out var oldProtect)) return false; // change protection to RWX
+                patchInfo.PatchBytes.CopyTo(patchSpan);
+                VirtualProtect(textSectionPtr, (UIntPtr)textSection->virtualSize, oldProtect, out _);
+                return true;
+            }
+
+            return false;
         }
 
         static void CreateExportButton()
