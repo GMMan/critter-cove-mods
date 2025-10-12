@@ -83,7 +83,7 @@ namespace CritterCove.ColorPreSetManagerSaveLoad
                         continue;
                     }
 
-                    convertedColors[i] = ColorToHex(p.Value[i]!.Value);
+                    convertedColors[i] = ColorUtility.ToHtmlStringRGB(p.Value[i]!.Value);
                 }
                 toSerialize.Add(p.Key, convertedColors);
             }
@@ -94,37 +94,17 @@ namespace CritterCove.ColorPreSetManagerSaveLoad
 
         public static Color HexToColor(string hex)
         {
-            hex = hex.TrimStart('#');
-            if (hex.Length == 3)
+            // Wrapper compatible with previous implementation
+            if (!hex.StartsWith("#")) hex = "#" + hex;
+            if (ColorUtility.TryParseHtmlString(hex, out Color color))
             {
-                return new Color(ParseHexToFloat($"{hex[0]}{hex[0]}"), ParseHexToFloat($"{hex[1]}{hex[1]}"), ParseHexToFloat($"{hex[2]}{hex[2]}"));
-            }
-            else if (hex.Length == 6)
-            {
-                return new Color(ParseHexToFloat(hex.Substring(0, 2)), ParseHexToFloat(hex.Substring(2, 2)), ParseHexToFloat(hex.Substring(4, 2)));
+                color.a = 1.0f;
+                return color;
             }
             else
             {
                 throw new FormatException("Not a valid hex color.");
             }
-            
-        }
-
-        static float ParseHexToFloat(string hex)
-        {
-            return int.Parse(hex, System.Globalization.NumberStyles.HexNumber) / 255f;
-        }
-
-        public static string ColorToHex(Color color)
-        {
-            return $"{FloatToHex(color.r)}{FloatToHex(color.g)}{FloatToHex(color.b)}";
-        }
-
-        static string FloatToHex(float value)
-        {
-            int intValue = Mathf.RoundToInt(value * 255);
-            if (intValue > 255) intValue = 255; // Could this even happen?
-            return intValue.ToString("x2");
         }
     }
 }
